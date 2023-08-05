@@ -1,16 +1,15 @@
-const readline = require('readline');
+const readline = require("readline");
 
 const rline = require("readline").createInterface({
-    input: process.stdin,
-    output: process.stdout,
-  });
-
+  input: process.stdin,
+  output: process.stdout,
+});
 
 const tasks = [];
 const addTask = async () => {
   await new Promise((resolve) => {
     setTimeout(() => {
-        rline.question("Ingresa la tarea: ", (description) => {
+      rline.question("Ingresa la tarea: ", (description) => {
         const task = {
           id: tasks.length + 1,
           description: description,
@@ -32,7 +31,7 @@ const taskDelete = async () => {
       );
     }
     setTimeout(() => {
-      rl.question("¿Qué tarea deseas borrar?", (taskId) => {
+      rline.question("¿Qué tarea deseas borrar?", (taskId) => {
         const taskIndex = tasks.findIndex(
           (task) => task.id === parseInt(taskId)
         );
@@ -50,10 +49,15 @@ const taskDelete = async () => {
 };
 
 const ListStorage = () => {
-  for (const task of tasks)
-    console.log(`las tareas almacenadas son:  ${task.id}, ${task.description}`);
+  if (tasks.length === 0) {
+    console.log("Vaya!! no hay tareas almacenadas, agrega una!");
+  } else {
+    for (const task of tasks)
+      console.log(
+        `las tareas almacenadas son:  ${task.id}, ${task.description}`
+      );
+  }
 };
 
-module.exports = {addTask, taskDelete, ListStorage, rline} ;
+module.exports = { addTask, taskDelete, ListStorage, rline };
 // completed
-
