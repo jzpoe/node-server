@@ -1,25 +1,9 @@
 const inquirer = require("inquirer");
 const chalk = require("chalk");
-
+const addTask = require("addTask");
 const tasks = [];
 
-function addTask() {
-  inquirer
-    .prompt([
-      {
-        type: "input",
-        name: "task",
-        message: "Ingrese una nueva tarea",
-      },
-    ])
-    .then((answer) => {
-      const newTask = answer.task;
-      tasks.push(newTask);
-      console.log(chalk.green("Nueva tarea agregada"));
 
-      showMenu();
-    });
-}
 
 function showTasks() {
   console.log("Las tareas almacenadas son: ");
