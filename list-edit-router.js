@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 port = 3000;
+const app = express();
 
 // express.Router(express.json());
 
@@ -16,7 +17,7 @@ router.delete('/eliminar', ( req, res ) => {
     
 } );
 
-router.put('/actualizarTarea', ( req, res ) => {
+app.put('/actualizarTarea', ( req, res ) => {
     res.json({msg: 'actualizando la tarea'})
 } );
 
