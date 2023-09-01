@@ -1,43 +1,29 @@
-// const http = require ('http');
-// const port = 3000;
-
-// const server = http.createServer((req, res) => {
-//     const listaTareas ={
-//         id:"1",
-//         descripcion : 'barrer',
-//         estado:"completada"
-//         ,
-//     }
-//     const jsonListaTareas = JSON.stringify(listaTareas)
-
-//     res.writeHead(200, {'Content-Type': 'application/json'})
-//     res.end(jsonListaTareas)
-
-//     console.log(listaTareas)
-// })
-
-
-
-
-
-// server.listen(port, ()=>{
-//     console.log(`Servidor iniciado ${port}`)
-// });
-const router = require('./list-view-router')
-const router2= require('./list-edit-router')
-
 const express = require('express');
+const mongoose = require('mongoose');
+const metodos = require('./components/metodos.js');
+require("dotenv").config();
 const app = express();
-const port = 3000;
+const PORT = process.env.PORT || 3001;
 
 app.use(express.json());
+app.use('/', metodos);
 
 
+function conectDB(){
+    try {
+        mongoose.connect(process.env.MONGODB_URI)
+        .then(()=>console.log("conectado a la base de datos"))
+      
+        } catch (error) {
+          console.error('Error en la conexión a la base de datos:', error);
+        }
+    
+} 
+  
 
-app.use('/', router);
-app.use('/', router2)
-
-
-app.listen(port, ()=>{
-    console.log(`listening on port ${port} `)
+app.listen(PORT, () => {
+    console.log('Listening on port ' + PORT);
+   
 });
+
+module.exports = conectDB();
